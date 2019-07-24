@@ -6,6 +6,8 @@ The project is at an early development stage and there is a lot of work to be do
 Currently only basic 2D and 3D objects are suppported but model loading is planned for the future.
 Also there is exprimental support for ECS (Entity Component System) which uses a Data Oriented Desing behind the scenes.
 
+Same architectural decisions were greatly inspired from the Hazel engine.
+
 Current Progress:
 ![Screenshot](Screenshots/Colored_Triangle_OpenGL.png)
 
