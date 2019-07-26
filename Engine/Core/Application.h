@@ -37,12 +37,19 @@ namespace Neon
 
 			virtual ~Application() = default;
 
+		private:
+			double lastTime = 0.0;
+
+		private:
+			double GetDeltaTime();
+
 		protected:
 			std::shared_ptr<Event::EventBus> m_pBus;
 			std::shared_ptr<Window> m_Window;
 			std::unique_ptr<World::World> mWorld;
 
 			bool m_isRunning = true;
+			double deltaTime;
 		};
 
 		Application* CreateApplication();

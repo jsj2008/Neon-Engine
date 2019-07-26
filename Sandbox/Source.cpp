@@ -6,7 +6,7 @@ using namespace Neon;
 class MyApp : public Neon::Application::Application
 {
 public:
-	MyApp() : camera(glm::vec3(0.0f, 0.0f, -6.0f)), orthoCamera(-1.0f, 1.0f, -1.0f, 1.0f) {}
+	MyApp() : camera(glm::vec3(0.0f, 0.0f, -6.0f)), orthoCamera(-1.6f, 1.6f, -0.9f, 0.9f) {}
 
 	/* This method gets called when the appliction is created.*/
 	void Start() override
@@ -81,22 +81,22 @@ public:
 		if (Input::InputManager::GetKey(NEON_KEY_W))
 		{
 			m_CameraPosition += camera.GetFrontVector() * camera.GetCameraSpeed();
-			m_OrthoPosition.y += 0.1f;
+			m_OrthoPosition.y += 2.0f * deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_S))
 		{
 			m_CameraPosition -= camera.GetFrontVector() * camera.GetCameraSpeed();
-			m_OrthoPosition.y -= 0.1f;
+			m_OrthoPosition.y -= 2.0f * deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_A))
 		{
 			m_CameraPosition -= camera.GetRightVector() * camera.GetCameraSpeed();
-			m_OrthoPosition.x -= 0.1f;
+			m_OrthoPosition.x -= 2.0f * deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_D))
 		{
 			m_CameraPosition += camera.GetRightVector() * camera.GetCameraSpeed();
-			m_OrthoPosition.x += 0.1f;
+			m_OrthoPosition.x += 2.0f * deltaTime;
 		}
 
 		orthoCamera.SetPosition(m_OrthoPosition);
