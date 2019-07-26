@@ -24,7 +24,7 @@ namespace Neon
 			void RemoveComponent(ComponentType c);
 
 			template <typename ComponentType>
-			Component::ComponentHandle<ComponentType> GetComponent();
+			Component::ComponentHandle<ComponentType> GetComponent() const;
 
 			template <typename ComponentType>
 			void SetComponent(ComponentType newC);
@@ -47,7 +47,7 @@ namespace Neon
 		}
 		
 		template<typename ComponentType>
-		inline Component::ComponentHandle<ComponentType> GameObjectHandle::GetComponent()
+		inline Component::ComponentHandle<ComponentType> GameObjectHandle::GetComponent() const
 		{
 			NEON_ASSERT(Component::Component<ComponentType>::family() < mSceneNode->mScene->mComponentManagers.size());
 			return mSceneNode->GetComponent<ComponentType>();

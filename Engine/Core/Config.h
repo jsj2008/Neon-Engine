@@ -27,7 +27,7 @@
 #endif
 
 #define NEON_MAIN_APPLICATION(x) \
-Application* Neon::Application::CreateApplication() \
+Neon::Application::Application* Neon::Application::CreateApplication() \
 { \
 	return new x(); \
 } \

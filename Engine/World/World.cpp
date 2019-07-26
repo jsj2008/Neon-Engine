@@ -10,8 +10,6 @@ namespace Neon
 		World::World(const std::string& name)
 		{
 			mName = name;
-			mID = std::hash<std::string>()(mName);
-
 			mSceneManager = new SceneManager();
 		}
 		
@@ -24,6 +22,11 @@ namespace Neon
 		{
 			SceneHandle handle(this, mSceneManager->GetScene(name));
 			return handle;
+		}
+		
+		void World::IterateScenes(std::function<void(const SceneHandle& scene)> lambda)
+		{
+			mSceneManager->Iterate(this, lambda);
 		}
 	}
 }

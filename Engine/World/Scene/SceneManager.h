@@ -8,6 +8,8 @@ namespace Neon
 	namespace World
 	{
 		class Scene;
+		class World;
+		class SceneHandle;
 		
 		class NEON_API SceneManager
 		{
@@ -18,6 +20,7 @@ namespace Neon
 			Scene* GetScene(const std::string& name);
 
 			void DeleteScene(const std::string& name);
+			void Iterate(World* world, std::function<void(const SceneHandle& scene)> lambda);
 
 			~SceneManager();
 

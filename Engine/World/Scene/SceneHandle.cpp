@@ -24,7 +24,7 @@ namespace Neon
 			mScene->GetRootNode().DeleteChild(name);
 		}
 		
-		void SceneHandle::Iterate(std::function<void(GameObjectHandle g)> lambda)
+		void SceneHandle::Iterate(std::function<void(const GameObjectHandle& g)> lambda) const
 		{
 			mScene->Iterate(lambda);
 		}

@@ -25,7 +25,7 @@ namespace Neon
 			return mSceneNodes[name];
 		}
 		
-		void Scene::Iterate(std::function<void(GameObjectHandle g)> lambda)
+		void Scene::Iterate(std::function<void(const GameObjectHandle& g)> lambda)
 		{
 			for (auto& pair : mSceneNodes)
 			{

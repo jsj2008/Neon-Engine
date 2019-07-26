@@ -33,7 +33,7 @@ namespace Neon
 
 			NodeHandle GetRootNode();
 			
-			void Iterate(std::function<void(GameObjectHandle g)> lambda);
+			void Iterate(std::function<void(const GameObjectHandle& g)> lambda);
 
 			~Scene();
 

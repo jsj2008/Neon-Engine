@@ -26,7 +26,7 @@ namespace Neon
 			NodeHandle GetNode(const std::string& name);
 			
 			void DeleteNode(const std::string& name);
-			void Iterate(std::function<void(GameObjectHandle g)> lambda);
+			void Iterate(std::function<void(const GameObjectHandle& g)> lambda) const;
 
 		private:
 			Component::ComponentMask& GetGameObjectMask(GameObject obj);

@@ -19,7 +19,9 @@ namespace Neon
 
 			void CreateScene(const std::string& name);
 
-			 SceneHandle GetScene(const std::string& name);
+			SceneHandle GetScene(const std::string& name);
+
+			void IterateScenes(std::function<void(const SceneHandle& scene)> lambda);
 
 			 ~World() { delete mSceneManager; }
 
@@ -27,7 +29,6 @@ namespace Neon
 			SceneManager* mSceneManager;
 
 			std::string mName;
-			std::size_t mID;
 		};
 	}
 }
