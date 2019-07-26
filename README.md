@@ -93,19 +93,19 @@ public:
 		/* Example use of the InputManager for camera controls */
 		if (Input::InputManager::GetKey(NEON_KEY_W))
 		{
-			m_OrthoPosition.y += 0.1f;
+			m_OrthoPosition.y += 2.0f * deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_S))
 		{
-			m_OrthoPosition.y -= 0.1f;
+			m_OrthoPosition.y -= 2.0f * deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_A))
 		{
-			m_OrthoPosition.x -= 0.1f;
+			m_OrthoPosition.x -= 2.0f * deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_D))
 		{
-			m_OrthoPosition.x += 0.1f;
+			m_OrthoPosition.x += 2.0f * deltaTime;
 		}
 
 		orthoCamera.SetPosition(m_OrthoPosition);
