@@ -7,7 +7,7 @@ Currently only basic 2D and 3D objects are suppported but model loading is plann
 Also there is exprimental support for ECS (Entity Component System) which uses a Data Oriented Desing behind the scenes.
 
 Current Progress:
-![Screenshot](Screenshots/Colored_Triangle_OpenGL.png)
+![Screenshot](Screenshots/Quads.png)
 
 Here is a sample program which outputs the above triangle:
 ``` 
@@ -19,7 +19,7 @@ using namespace Neon;
 class MyApp : public Neon::Application::Application
 {
 public:
-	MyApp() : orthoCamera(-1.0f, 1.0f, -1.0f, 1.0f) {}
+	MyApp() : orthoCamera(-1.6f, 1.6f, -1.2f, 1.2f) {}
 
 	/* This method gets called when the appliction is created.*/
 	void Start() override
