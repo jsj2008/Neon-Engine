@@ -7,7 +7,7 @@ Currently only basic 2D and 3D objects are suppported but model loading is plann
 Also there is exprimental support for ECS (Entity Component System) which uses a Data Oriented Desing behind the scenes.
 
 Current Progress:
-![Screenshot](Screenshots/Colored_Triangle_OpenGL.png)
+![Screenshot](Screenshots/Quad.png)
 
 Here is a sample program which outputs the above triangle:
 ``` 
