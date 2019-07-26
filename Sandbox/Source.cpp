@@ -6,7 +6,7 @@ using namespace Neon;
 class MyApp : public Neon::Application::Application
 {
 public:
-	MyApp() : camera(glm::vec3(0.0f, 0.0f, -6.0f)), orthoCamera(-1.6f, 1.6f, -0.9f, 0.9f) {}
+	MyApp() : camera(glm::vec3(0.0f, 0.0f, -6.0f)), orthoCamera(-1.6f, 1.6f, -1.2f, 1.2f) {}
 
 	/* This method gets called when the appliction is created.*/
 	void Start() override

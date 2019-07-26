@@ -24,7 +24,7 @@ namespace Neon
 			
 			m_pBus = std::make_shared<Event::EventBus>();
 			mWorld = std::make_unique<World::World>("Main");
-			m_Window = std::make_shared<Win32Window>("Neon Game Engine", 1920, 1080, this->m_pBus);
+			m_Window = std::make_shared<Win32Window>("Neon Game Engine", 1000, 700, this->m_pBus);
 			m_Window->SetVSync(true);
 
 			Input::InputManager::Init(m_Window);
