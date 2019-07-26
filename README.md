@@ -9,7 +9,7 @@ Also there is exprimental support for ECS (Entity Component System) which uses a
 Current Progress:
 ![Screenshot](Screenshots/Quad.png)
 
-Here is a sample program which outputs the above triangle:
+Here is a sample program which outputs the above:
 ``` 
 #include <Neon.h>
 
