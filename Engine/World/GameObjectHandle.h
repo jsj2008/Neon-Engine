@@ -1,22 +1,21 @@
 #pragma once
 
 #include "Core/Config.h"
-#include "Scene/SceneNode.h"
 #include "GameObject.h"
 #include "Components/ComponentHandle.h"
+#include "Scene/SceneNode.h"
 
 namespace Neon
 {
 	namespace World
 	{
-		class SceneNode;
-
 		class NEON_API GameObjectHandle
 		{
+		private:
+			friend class SceneNode;
 		public:
-			GameObjectHandle(SceneNode* node, GameObject obj) : mSceneNode(node), mGameObejct(obj) {}
-
-			void Destroy();
+			GameObjectHandle() = default;
+			GameObjectHandle(SceneNode* node, GameObject obj) : mSceneNode(node), mGameObject(obj) {}
 
 			template <typename ComponentType>
 			void AddComponent(ComponentType c);
@@ -27,9 +26,12 @@ namespace Neon
 			template <typename ComponentType>
 			Component::ComponentHandle<ComponentType> GetComponent();
 
+			template <typename ComponentType>
+			void SetComponent(ComponentType newC);
+
 		private:
 			SceneNode* mSceneNode;
-			GameObject mGameObejct;
+			GameObject mGameObject;
 		};
 		
 		template<typename ComponentType>
@@ -49,6 +51,12 @@ namespace Neon
 		{
 			NEON_ASSERT(Component::Component<ComponentType>::family() < mSceneNode->mScene->mComponentManagers.size());
 			return mSceneNode->GetComponent<ComponentType>();
+		}
+		
+		template<typename ComponentType>
+		inline void GameObjectHandle::SetComponent(ComponentType newC)
+		{
+			mSceneNode->SetComponent(newC);
 		}
 	}
 }

@@ -15,7 +15,7 @@ namespace Neon
 
 			virtual void Bind() = 0;
 
-			virtual void UploadUniformMat4(std::string name, glm::mat4& matrix4) = 0;
+			virtual void UploadUniformMat4(std::string name, const glm::mat4& matrix4) = 0;
 
 			static std::shared_ptr<Shader> Create(std::string vertexPath, std::string pixelPath);
 

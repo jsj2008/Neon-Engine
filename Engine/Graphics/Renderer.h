@@ -22,7 +22,7 @@ namespace Neon
 			static void StartScene(World::OrthoCamera& camera);
 			static void StartScene(World::PerspectiveCamera& camera);
 
-			static void Submit(std::shared_ptr<VertexArray>& vertexArray, std::shared_ptr<Shader>& shader);
+			static void Submit(std::shared_ptr<VertexArray>& vertexArray, std::shared_ptr<Shader>& shader, const glm::mat4& model);
 			
 			static void EndScene() {}
 

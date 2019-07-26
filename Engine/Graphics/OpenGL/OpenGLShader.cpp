@@ -99,7 +99,7 @@ namespace Neon
 			return m_ShaderID;
 		}
 
-		void OpenGLShader::UploadUniformMat4(std::string name, glm::mat4& matrix4)
+		void OpenGLShader::UploadUniformMat4(std::string name, const glm::mat4& matrix4)
 		{
 			int uniformLoc = glGetUniformLocation(m_ShaderID, name.c_str());
 			glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, glm::value_ptr(matrix4));

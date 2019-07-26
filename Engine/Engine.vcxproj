@@ -137,10 +137,10 @@
     </ClCompile>
     <ClCompile Include="World\Components\ComponentMask.cpp" />
     <ClCompile Include="World\Components\Coponent.cpp" />
+    <ClCompile Include="World\Components\MeshRenderer.cpp" />
     <ClCompile Include="World\Components\Transform.cpp" />
     <ClCompile Include="World\Camera\OthoCamera.cpp" />
     <ClCompile Include="World\Camera\PerspectiveCamera.cpp" />
-    <ClCompile Include="World\GameObjectHandle.cpp" />
     <ClCompile Include="World\GameObjectManager.cpp" />
     <ClCompile Include="World\Scene\NodeHandle.cpp" />
     <ClCompile Include="World\Scene\Scene.cpp" />
@@ -187,13 +187,13 @@
     <ClInclude Include="World\Components\ComponentHandle.h" />
     <ClInclude Include="World\Components\ComponentManager.h" />
     <ClInclude Include="World\Components\ComponentMask.h" />
+    <ClInclude Include="World\Components\MeshRenderer.h" />
     <ClInclude Include="World\Components\Transform.h" />
     <ClInclude Include="World\Camera\OthoCamera.h" />
     <ClInclude Include="World\Camera\PerspectiveCamera.h" />
     <ClInclude Include="World\GameObject.h" />
     <ClInclude Include="World\GameObjectHandle.h" />
     <ClInclude Include="World\GameObjectManager.h" />
-    <ClInclude Include="World\Scene\Node.h" />
     <ClInclude Include="World\Scene\NodeHandle.h" />
     <ClInclude Include="World\Scene\Scene.h" />
     <ClInclude Include="World\Scene\SceneHandle.h" />

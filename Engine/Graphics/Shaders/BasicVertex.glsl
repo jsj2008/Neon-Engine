@@ -10,6 +10,6 @@ out vec3 Color;
 
 void main()
 {
-	gl_Position =  u_ProjectionView * u_ModelMatrix * vec4(inPos, 1.0f);
+	gl_Position = u_ProjectionView * u_ModelMatrix * vec4(inPos, 1.0f);
 	Color = inColor;
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Core/Config.h"
-#include "World/Scene/Scene.h"
 #include "Component.h"
 #include "ComponentManager.h"
 #include "World/GameObject.h"

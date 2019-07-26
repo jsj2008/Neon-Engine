@@ -19,7 +19,7 @@ namespace Neon
 
 			unsigned int GetID() override;
 
-			void UploadUniformMat4(std::string name, glm::mat4& matrix4) override;
+			void UploadUniformMat4(std::string name, const glm::mat4& matrix4) override;
 
 			void Bind() override;
 

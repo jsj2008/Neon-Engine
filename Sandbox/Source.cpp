@@ -6,8 +6,7 @@ using namespace Neon::Event;
 using namespace Neon::Component;
 using namespace Neon::Input;
 using namespace Neon::World;
-
-struct R : public Component<R> {};
+using namespace Neon::System;
 
 class MyApp : public Application
 {
@@ -54,13 +53,11 @@ public:
 
 		SceneHandle mScene = mWorld->GetScene("Test");
 		
-		mScene.CreateNode("Trig");
+		NodeHandle node = mScene.CreateNode("Trig");
+		NodeHandle child = node.CreateChild("Child");
 
-		NodeHandle node = mScene.GetNode("Trig");
-		
-		GameObjectHandle g = node.GetGameObject();
-
-		g.AddComponent<Transform>(Transform());
+		node.GetGameObject().SetComponent<Transform>(Transform(glm::vec3(-0.5f, 0.0f, 0.0f)));
+		child.GetGameObject().SetComponent<Transform>(Transform(glm::vec3(0.5f, 0.0f, 0.0f)));
 	}
 	
 	void OnUpdate() override
@@ -94,11 +91,16 @@ public:
 
 	void OnRender() override
 	{
-		Renderer::StartScene(orthoCamera);
+		Renderer::StartScene(camera);
 
 		DrawCommand::ClearBuffer(0.1f, 0.2f, 0.3f, 1.0f);
-		Renderer::Submit(vertexArray, shader);
 		
+		mWorld->GetScene("Test").Iterate([this](GameObjectHandle g)
+		{
+			ComponentHandle<Transform> tr = g.GetComponent<Transform>();
+			Renderer::Submit(vertexArray, shader, tr->GetModelMatrix());
+		});
+
 		Renderer::EndScene();
 	}
 

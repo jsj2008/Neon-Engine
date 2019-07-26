@@ -40,7 +40,6 @@
 #include "World/Components/ComponentMask.h"
 #include "World/GameObject.h"
 #include "World/GameObjectManager.h"
-#include "World/Scene/Node.h"
 #include "World/Scene/NodeHandle.h"
 #include "World/Scene/Scene.h"
 #include "World/Scene/SceneHandle.h"

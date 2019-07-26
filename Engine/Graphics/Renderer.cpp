@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "glm/gtx/string_cast.hpp"
 #include "Renderer.h"
 
 namespace Neon
@@ -17,11 +18,11 @@ namespace Neon
 			m_SceneData->m_ViewProjectionMatrix = camera.GetProjectionViewMatrix();
 		}
 
-		void Renderer::Submit(std::shared_ptr<VertexArray>& vertexArray, std::shared_ptr<Shader>& shader)
+		void Renderer::Submit(std::shared_ptr<VertexArray>& vertexArray, std::shared_ptr<Shader>& shader, const glm::mat4& model)
 		{
 			shader->Bind();
 			shader->UploadUniformMat4("u_ProjectionView", m_SceneData->m_ViewProjectionMatrix);
-			shader->UploadUniformMat4("u_ModelMatrix", m_SceneData->m_identityMatrix);
+			shader->UploadUniformMat4("u_ModelMatrix", model);
 
 			vertexArray->Bind();
 			DrawCommand::DrawIndexed(vertexArray);

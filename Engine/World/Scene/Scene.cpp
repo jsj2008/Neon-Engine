@@ -1,7 +1,9 @@
 #include "stdafx.h"
-#include "SceneNode.h"
 #include "Scene.h"
-#include "World/GameObject.h"
+
+#include "SceneNode.h"
+#include "NodeHandle.h"
+#include "World/GameObjectHandle.h"
 
 namespace Neon
 {
@@ -9,35 +11,38 @@ namespace Neon
 	{
 		Scene::Scene(const std::string& name)
 		{
-			std::hash<std::string> hasher;
-			
 			mName = name;
-			mID = hasher(name);
+			mSceneNodes["Root"] = new SceneNode(this, "Root");
+		}
 
-			mRootNode = Node(mLastNode++);
-			mSceneNodes[mRootNode.mID] = std::make_shared<SceneNode>(this, "Root");
-			mNodes["Root"] = mRootNode;
+		NodeHandle Scene::GetRootNode()
+		{
+			return NodeHandle(this, mSceneNodes["Root"]);
 		}
 		
-		void Scene::CreateNode(const std::string& name)
+		SceneNode* Scene::GetSceneNode(const std::string& name)
 		{
-			Node mChild(mLastNode++);
-			mRootNode.mChildrenIDs.push_back(mChild.mID);
-			mSceneNodes[mChild.mID] = std::make_shared<SceneNode>(this, name);
-			mNodes[name] = mChild;
-		}
-
-		void Scene::DeleteNode(const std::string& name)
-		{
-			mRootNode.mChildrenIDs.erase(std::find(mRootNode.mChildrenIDs.begin(), mRootNode.mChildrenIDs.end(), mNodes[name].mID));
+			return mSceneNodes[name];
 		}
 		
-		Node Scene::GetNode(const std::string& name)
+		void Scene::Iterate(std::function<void(GameObjectHandle g)> lambda)
 		{
-			NEON_ASSERT(mNodes.count(name) > 0);
-			NEON_ASSERT(std::find(mRootNode.mChildrenIDs.begin(), mRootNode.mChildrenIDs.end(), mNodes[name].mID) != mRootNode.mChildrenIDs.end());
-
-			return mNodes[name];
+			for (auto& pair : mSceneNodes)
+			{
+				if (pair.first != "Root")
+				{
+					GameObjectHandle handle = GameObjectHandle(pair.second, pair.second->mGameObject);
+					lambda(handle);
+				}
+			}
+		}
+		
+		Scene::~Scene()
+		{
+			for (auto& kv : mSceneNodes)
+			{
+				delete kv.second;
+			}
 		}
 	}
 }

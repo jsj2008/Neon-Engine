@@ -2,6 +2,8 @@
 #include "Platform/Windows/Win32InputManager.h"
 #include "Platform/Windows/Win32Window.h"
 #include "Event/EventBus.h"
+#include "World/GameObjectHandle.h"
+#include "../World/Scene/SceneHandle.h"
 #include "glm/gtx/string_cast.hpp"
 #include "Graphics/Renderer.h"
 #include "Application.h"

@@ -1,24 +1,35 @@
 #pragma once
 
 #include "Config.h"
-
-#include "stdafx.h"
+#include "World/GameObject.h"
+#include "World/Components/Component.h"
+#include <bitset>
 
 namespace Neon 
 {
-	class Context;
-	
-	class ISystem 
+	namespace System
 	{
-	public:
-		ISystem() = default;
+		class World::Scene;
 
-		virtual bool Init() { return true; };
+		class NEON_API System
+		{
+		public:
+			virtual void Init() = 0;
 
-		virtual void Update();
+			virtual void Update() = 0;
+			virtual void Render() = 0;
 
-		virtual const char* GetName() { return "ISystem"; }
+			virtual void RegisterGameObject(World::GameObject obj) = 0;
+			virtual void UnregisterGameObject(World::GameObject obj) = 0;
 
-		virtual ~ISystem() = default;
-	};
+			virtual ~System() = default;
+
+		protected:
+			std::bitset<32> mSystemSignature;
+
+			std::vector<World::GameObject> mGameobjects;
+			World::Scene* mScene;
+		};
+		
+	}
 }

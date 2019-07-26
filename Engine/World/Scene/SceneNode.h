@@ -10,49 +10,44 @@ namespace Neon
 {
 	namespace World
 	{
-		class Scene;
-		class GameObjectHandle;
-		class Node;
-		
 		class NEON_API SceneNode
 		{
 		private:
 			friend class Scene;
 			friend class GameObjectHandle;
+			friend class NodeHandle;
 
 		public:
-			SceneNode(Scene* scene, const std::string& name = "Root");
+			SceneNode(Scene* scene, const std::string& name);
 
-			size_t GetID() { return mID; }
+			void SetParent(const std::string& name) { mParent = name; }
 
 			void CreateChild(const std::string& name);
 			void DeleteChild(const std::string& name);
 
-			Node GetChild(const std::string& name);
-
-			GameObjectHandle GetGameObject();
-			void DestroyGameObject();
+			SceneNode* GetChild(const std::string& name);
 
 			template <typename ComponentType>
 			void AddComponent(ComponentType c);
 
 			template <typename ComponentType>
-			void RemoveComponent(ComponentType c);
+			void RemoveComponent();
+
+			template <typename ComponentType>
+			void SetComponent(ComponentType newc);
 
 			template <typename ComponentType>
 			Component::ComponentHandle<ComponentType> GetComponent();
 
 		private:
-			std::hash<std::string> mHasher;
-
-			std::shared_ptr<SceneNode> mParent;
-			std::vector<int> mChildren;
+			std::string mParent;
+			std::vector<std::string> mChildren;
 			
 			std::string mName;
-			size_t mID = 0;
 
 			Scene* mScene;
 
+		public:
 			GameObject mGameObject;
 		};
 		
@@ -65,12 +60,19 @@ namespace Neon
 		}
 		
 		template<typename ComponentType>
-		inline void SceneNode::RemoveComponent(ComponentType c)
+		inline void SceneNode::RemoveComponent()
 		{
 			Component::ComponentManager<ComponentType>* manager = mScene->GetComponentManager<ComponentType>();
 			manager->RemoveComponent(mGameObject);
 
 			mScene->mGameObjectMasks[mGameObject].RemoveComponent<ComponentType>();
+		}
+
+		template<typename ComponentType>
+		inline void SceneNode::SetComponent(ComponentType newc)
+		{
+			Component::ComponentManager<ComponentType>* manager = mScene->GetComponentManager<ComponentType>();
+			manager->SetComponent(mGameObject, newc);
 		}
 		
 		template<typename ComponentType>
@@ -78,6 +80,7 @@ namespace Neon
 		{
 			Component::ComponentManager<ComponentType>* manager = mScene->GetComponentManager<ComponentType>();
 			return Component::ComponentHandle<ComponentType>(manager, mGameObject);
+			
 		}
 	}
 }

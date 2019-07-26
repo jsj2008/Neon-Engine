@@ -12,7 +12,7 @@ namespace Neon
 		};
 
 		template <typename ComponentType>
-		struct Component 
+		struct Component
 		{
 			static inline int family() 
 			{

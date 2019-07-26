@@ -43,9 +43,10 @@ namespace Neon
 
 			ComponentType* GetComponent(World::GameObject obj);
 
+			void SetComponent(World::GameObject e, ComponentType newc);
 			void RemoveComponent(World::GameObject e);
 
-			void Iterate(std::function<void(ComponentType c)> lambda);
+			void Iterate(std::function<void(ComponentType& c)> lambda);
 
 		private:
 			ComponentData<ComponentType> mComponentData;
@@ -71,11 +72,18 @@ namespace Neon
 		inline ComponentType* ComponentManager<ComponentType>::GetComponent(World::GameObject obj)
 		{
 			ComponentInstance inst = mGameObjectMap[obj];
-			std::cout << inst;
-
+			
 			return &mComponentData.mData[inst];
+		
 		}
 		
+		template<typename ComponentType>
+		inline void ComponentManager<ComponentType>::SetComponent(World::GameObject e, ComponentType newc)
+		{
+			ComponentInstance inst = mGameObjectMap[e];
+			mComponentData.mData[inst] = newc;
+		}
+
 		template<typename ComponentType>
 		inline void ComponentManager<ComponentType>::RemoveComponent(World::GameObject obj)
 		{
@@ -89,7 +97,7 @@ namespace Neon
 		}
 		
 		template<typename ComponentType>
-		inline void ComponentManager<ComponentType>::Iterate(std::function<void(ComponentType c)> lambda)
+		inline void ComponentManager<ComponentType>::Iterate(std::function<void(ComponentType& c)> lambda)
 		{
 			for (int i = 1; i < mComponentData.mSize; i++)
 			{

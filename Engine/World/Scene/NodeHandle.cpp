@@ -8,30 +8,29 @@ namespace Neon
 {
 	namespace World
 	{
-		void NodeHandle::CreateChild(const std::string& name)
+		NodeHandle NodeHandle::CreateChild(const std::string& name)
 		{
-			mScene->mSceneNodes[mSceneNode.mID]->CreateChild(name);
-			mChildren.push_back(name);
+			mScene->mSceneNodes[mSceneNode->mName]->CreateChild(name);
+			return this->GetChild(name);
 		}
 
 		NodeHandle NodeHandle::GetChild(const std::string& name)
 		{
-			Node childNode = mScene->mNodes.at(name);
-			return NodeHandle(mScene, childNode);
+			return NodeHandle(mScene, mSceneNode->GetChild(name));
 		}
 		
 		void NodeHandle::DeleteChild(const std::string& name)
 		{
-			if (mScene->mNodes.count(name) > 0)
+			if (mScene->mSceneNodes.count(name) > 0)
 			{
-				mScene->mSceneNodes.erase(mScene->mNodes[name].mID);
-				mScene->mNodes.erase(name);
+				delete mScene->mSceneNodes[name];
+				mScene->mSceneNodes.erase(name);
 			}
 		}
 		
 		GameObjectHandle NodeHandle::GetGameObject()
 		{
-			return mScene->mSceneNodes[mSceneNode.mID]->GetGameObject();
+			return GameObjectHandle(mSceneNode, mSceneNode->mGameObject);
 		}
 	}
 }
