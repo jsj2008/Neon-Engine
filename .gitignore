@@ -1,7 +1,7 @@
 # Directories
 .vs/
 /bin/
-bin-int/
+./ThirdParty
 
 # Files
 *.user
