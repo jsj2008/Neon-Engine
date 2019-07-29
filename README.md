@@ -14,18 +14,20 @@ Here is a sample program which outputs the above:
 #include <Neon.h>
 
 using namespace Neon;
+using namespace Neon::World;
+using namespace Neon::Component;
 
 /* The game class. This is the place where the game code must be written */
 class MyApp : public Neon::Application::Application
 {
 public:
-	MyApp() : orthoCamera(-1.6f, 1.6f, -1.2f, 1.2f) {}
+	MyApp() : camera(glm::vec3(0.0f, 0.0f, -6.0f)), orthoCamera(-1.6f, 1.6f, -1.2f, 1.2f) {}
 
 	/* This method gets called when the appliction is created.*/
 	void Start() override
 	{
 		/* This is the array of vertices that make up the quad.*/
-		/* NOTE: This is temporary and will be replaced by a MeshRenderer component! */
+		/* NOTE: This is temporary and will be replaced by a Mesh component! */
 		std::vector<float> vertices = 
 		{
 			 /* Positions			    Colors*/
@@ -70,21 +72,20 @@ public:
 		vertexArray->Unbind();
 
 		/* Creating a new scene in the world */
-		mWorld->CreateScene("Test");
+		mSceneManager->CreateScene("Test");
 
-		World::SceneHandle mScene = mWorld->GetScene("Test");
-		
+		SceneRef mScene = mSceneManager->GetScene("Test");
+
 		/* Creating a set of children nodes in the scenes root node */
-		/* Note the use of handles which provide the user with an easy and safe interface to the scene */
-		World::NodeHandle node1 = mScene.CreateNode("Trig1");
-		World::NodeHandle node2 = mScene.CreateNode("Trig2");
-		World::NodeHandle node3 = mScene.CreateNode("Trig3");
-
+		SceneNodeRef node1 = mScene->GetRootNode()->CreateChildNode("Quad1");
+		SceneNodeRef node2 = mScene->GetRootNode()->CreateChildNode("Quad2");
+		SceneNodeRef node3 = mScene->GetRootNode()->CreateChildNode("Quad3");
+		
 		/* Setting the transform component in each of the nodes */
 		/* NOTE: The transform component is always created by default with a node! */
-		node1.GetGameObject().SetComponent<Component::Transform>(Component::Transform(glm::vec3(-1.5f, 0.0f, 0.0f)));
-		node2.GetGameObject().SetComponent<Component::Transform>(Component::Transform(glm::vec3(0.0f, 0.0f, 0.0f)));
-		node2.GetGameObject().SetComponent<Component::Transform>(Component::Transform(glm::vec3(1.5f, 0.0f, 0.0f)));
+		node1->SetComponent<Transform>(Transform(glm::vec3(-1.5f, 0.0f, 0.0f)));
+		node2->SetComponent<Transform>(Transform(glm::vec3(0.0f, 0.0f, 0.0f)));
+		node2->SetComponent<Transform>(Transform(glm::vec3(1.5f, 0.0f, 0.0f)));
 	}
 	
 	/* This method is called on every simulation step */
@@ -93,42 +94,46 @@ public:
 		/* Example use of the InputManager for camera controls */
 		if (Input::InputManager::GetKey(NEON_KEY_W))
 		{
-			m_OrthoPosition.y += 2.0f * deltaTime;
+			m_CameraPosition += camera.GetFrontVector() * camera.GetCameraSpeed();
+			m_OrthoPosition.y += 2.0f * (float)deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_S))
 		{
-			m_OrthoPosition.y -= 2.0f * deltaTime;
+			m_CameraPosition -= camera.GetFrontVector() * camera.GetCameraSpeed();
+			m_OrthoPosition.y -= 2.0f * (float)deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_A))
 		{
-			m_OrthoPosition.x -= 2.0f * deltaTime;
+			m_CameraPosition -= camera.GetRightVector() * camera.GetCameraSpeed();
+			m_OrthoPosition.x -= 2.0f * (float)deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_D))
 		{
-			m_OrthoPosition.x += 2.0f * deltaTime;
+			m_CameraPosition += camera.GetRightVector() * camera.GetCameraSpeed();
+			m_OrthoPosition.x += 2.0f * (float)deltaTime;
 		}
 
 		orthoCamera.SetPosition(m_OrthoPosition);
+
+		camera.SetPosition(m_CameraPosition);
+		camera.ProcessMouseMovement();
 	}
 
 	void OnRender() override
 	{
 		/* Neon's rendering pipeline */
-		/* NOTE: this is temporary. In the future this will be done automatically with the MeshRenderer component! */
+		/* NOTE: this is temporary. In the future this will be done automatically with the Mesh component! */
 		Graphics::Renderer::StartScene(orthoCamera);
 
 		Graphics::DrawCommand::ClearBuffer(0.1f, 0.2f, 0.3f, 1.0f);
 
 		/* Iterating over the scenes and drawing all the gameObjects */
 		/* NOTE: this is temporary. In the future only the active scene will be rendered! */
-		/* Due to the lack of a MeshRenderer component the use of a manually creared mesh (vertexArray) is required! */
-		mWorld->IterateScenes([this](const World::SceneHandle& scene)
+		/* Due to the lack of a Mesh component the use of a manually creared mesh (vertexArray) is required! */
+		mSceneManager->GetActiveScene()->IterateSceneNodes([this](const World::SceneNodeRef& node)
 		{
-			scene.Iterate([this](const World::GameObjectHandle& gameObject)
-			{
-				auto transform = gameObject.GetComponent<Component::Transform>();
-				Graphics::Renderer::Submit(vertexArray, shader, transform->GetModelMatrix());
-			});
+			ComponentRef<Transform> transform = node->GetComponent<Transform>();
+			Graphics::Renderer::Submit(vertexArray, shader, transform->GetModelMatrix());
 		});
 
 		Graphics::Renderer::EndScene();
@@ -146,6 +151,9 @@ private:
 
 	World::OrthoCamera orthoCamera;
 	glm::vec3 m_OrthoPosition = glm::vec3(0.0f);
+
+	World::PerspectiveCamera camera;
+	glm::vec3 m_CameraPosition = glm::vec3(0.0f);
 };
 
 /* Sets your application as the current active application */
