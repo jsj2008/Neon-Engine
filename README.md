@@ -1,19 +1,24 @@
 # Neon-Engine
+
 The Neon Game Engine is an experimental project using OpenGL Rendering API.
-It's goal is to create an easy to use Unity-like engine for the user.
+It's goal is to create an easy to use engine for the user. It is mainly written
+in C++ but scripting in Python is planned for the future. 
 
 The project is at an early development stage and there is a lot of work to be done.
 Currently only basic 2D and 3D objects are suppported but model loading is planned for the future.
-Also there is exprimental support for ECS (Entity Component System) which uses a Data Oriented Desing behind the scenes.
+Also there is paartial support for ECS (Entity Component System) which uses a Data Oriented Design
+for improved performace and reliability.
 
-Current Progress:
+# Current Progress:
 ![Screenshot](Screenshots/Quad.png)
 
-Here is a sample program which outputs the above:
+# Sample Program
 ``` 
 #include <Neon.h>
 
 using namespace Neon;
+using namespace Neon::World;
+using namespace Neon::Component;
 
 /* The game class. This is the place where the game code must be written */
 class MyApp : public Neon::Application::Application
@@ -25,7 +30,7 @@ public:
 	void Start() override
 	{
 		/* This is the array of vertices that make up the quad.*/
-		/* NOTE: This is temporary and will be replaced by a MeshRenderer component! */
+		/* NOTE: This is temporary and will be replaced by a Mesh component! */
 		std::vector<float> vertices = 
 		{
 			 /* Positions			    Colors*/
@@ -43,7 +48,7 @@ public:
 		};
 		
 		/* This is the creation of a basic set of shaders */
-		/* NOTE: In the future shader files will be created at runtime! */
+		/* NOTE: In the future shader files will be created at runtime by materials! */
 		std::string vertPath = "Engine/Graphics/Shaders/BasicVertex.glsl";
 		std::string fragPath = "Engine/Graphics/Shaders/BasicFrag.glsl";
 		shader = Graphics::Shader::Create(vertPath, fragPath);
@@ -70,21 +75,20 @@ public:
 		vertexArray->Unbind();
 
 		/* Creating a new scene in the world */
-		mWorld->CreateScene("Test");
+		mSceneManager->CreateScene("Test");
 
-		World::SceneHandle mScene = mWorld->GetScene("Test");
-		
+		SceneRef mScene = mSceneManager->GetScene("Test");
+
 		/* Creating a set of children nodes in the scenes root node */
-		/* Note the use of handles which provide the user with an easy and safe interface to the scene */
-		World::NodeHandle node1 = mScene.CreateNode("Trig1");
-		World::NodeHandle node2 = mScene.CreateNode("Trig2");
-		World::NodeHandle node3 = mScene.CreateNode("Trig3");
-
+		SceneNodeRef node1 = mScene->GetRootNode()->CreateChildNode("Quad1");
+		SceneNodeRef node2 = mScene->GetRootNode()->CreateChildNode("Quad2");
+		SceneNodeRef node3 = mScene->GetRootNode()->CreateChildNode("Quad3");
+		
 		/* Setting the transform component in each of the nodes */
 		/* NOTE: The transform component is always created by default with a node! */
-		node1.GetGameObject().SetComponent<Component::Transform>(Component::Transform(glm::vec3(-1.5f, 0.0f, 0.0f)));
-		node2.GetGameObject().SetComponent<Component::Transform>(Component::Transform(glm::vec3(0.0f, 0.0f, 0.0f)));
-		node2.GetGameObject().SetComponent<Component::Transform>(Component::Transform(glm::vec3(1.5f, 0.0f, 0.0f)));
+		node1->SetComponent<Transform>(Transform(glm::vec3(-1.5f, 0.0f, 0.0f)));
+		node2->SetComponent<Transform>(Transform(glm::vec3(0.0f, 0.0f, 0.0f)));
+		node2->SetComponent<Transform>(Transform(glm::vec3(1.5f, 0.0f, 0.0f)));
 	}
 	
 	/* This method is called on every simulation step */
@@ -93,19 +97,19 @@ public:
 		/* Example use of the InputManager for camera controls */
 		if (Input::InputManager::GetKey(NEON_KEY_W))
 		{
-			m_OrthoPosition.y += 2.0f * deltaTime;
+			m_OrthoPosition.y += 2.0f * (float)deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_S))
 		{
-			m_OrthoPosition.y -= 2.0f * deltaTime;
+			m_OrthoPosition.y -= 2.0f * (float)deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_A))
 		{
-			m_OrthoPosition.x -= 2.0f * deltaTime;
+			m_OrthoPosition.x -= 2.0f * (float)deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_D))
 		{
-			m_OrthoPosition.x += 2.0f * deltaTime;
+			m_OrthoPosition.x += 2.0f * (float)deltaTime;
 		}
 
 		orthoCamera.SetPosition(m_OrthoPosition);
@@ -114,21 +118,17 @@ public:
 	void OnRender() override
 	{
 		/* Neon's rendering pipeline */
-		/* NOTE: this is temporary. In the future this will be done automatically with the MeshRenderer component! */
+		/* NOTE: this is temporary. In the future this will be done automatically with the Mesh component! */
 		Graphics::Renderer::StartScene(orthoCamera);
 
 		Graphics::DrawCommand::ClearBuffer(0.1f, 0.2f, 0.3f, 1.0f);
 
 		/* Iterating over the scenes and drawing all the gameObjects */
-		/* NOTE: this is temporary. In the future only the active scene will be rendered! */
-		/* Due to the lack of a MeshRenderer component the use of a manually creared mesh (vertexArray) is required! */
-		mWorld->IterateScenes([this](const World::SceneHandle& scene)
+		/* Due to the lack of a Mesh component the use of a manually creared mesh (vertexArray) is required! */
+		mSceneManager->GetActiveScene()->IterateSceneNodes([this](const World::SceneNodeRef& node)
 		{
-			scene.Iterate([this](const World::GameObjectHandle& gameObject)
-			{
-				auto transform = gameObject.GetComponent<Component::Transform>();
-				Graphics::Renderer::Submit(vertexArray, shader, transform->GetModelMatrix());
-			});
+			ComponentRef<Transform> transform = node->GetComponent<Transform>();
+			Graphics::Renderer::Submit(vertexArray, shader, transform->GetModelMatrix());
 		});
 
 		Graphics::Renderer::EndScene();
