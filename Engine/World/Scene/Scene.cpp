@@ -1,9 +1,7 @@
 #include "stdafx.h"
 #include "Scene.h"
-
 #include "SceneNode.h"
-#include "NodeHandle.h"
-#include "World/GameObjectHandle.h"
+#include "SceneNodeRef.h"
 
 namespace Neon
 {
@@ -12,37 +10,19 @@ namespace Neon
 		Scene::Scene(const std::string& name)
 		{
 			mName = name;
-			mSceneNodes["Root"] = new SceneNode(this, "Root");
+			mRootNode = std::make_unique<SceneNode>(this, "Root");
 		}
 
-		NodeHandle Scene::GetRootNode()
+		SceneNodeRef Scene::GetRootNode()
 		{
-			return NodeHandle(this, mSceneNodes["Root"]);
+			return SceneNodeRef(mRootNode.get());
 		}
 		
-		SceneNode* Scene::GetSceneNode(const std::string& name)
+		void Scene::IterateSceneNodes(std::function<void(const SceneNodeRef& node)> func)
 		{
-			return mSceneNodes[name];
+			mRootNode->IterateChildren(func);
 		}
 		
-		void Scene::Iterate(std::function<void(const GameObjectHandle& g)> lambda)
-		{
-			for (auto& pair : mSceneNodes)
-			{
-				if (pair.first != "Root")
-				{
-					GameObjectHandle handle = GameObjectHandle(pair.second, pair.second->mGameObject);
-					lambda(handle);
-				}
-			}
-		}
-		
-		Scene::~Scene()
-		{
-			for (auto& kv : mSceneNodes)
-			{
-				delete kv.second;
-			}
-		}
+		Scene::~Scene() = default;
 	}
 }

@@ -77,7 +77,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Binaries\$(ProjectName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Binaries\$(ProjectName)$(Configuration)\Intermediate\</IntDir>
-    <IncludePath>$(SolutionDir)ThirdParty\stb\Include;$(SolutionDir)ThirdParty\glm\Include;$(SolutionDir)ThirdParty\ImGui\Include;$(SolutionDir)ThirdParty\spdlog\Include;$(SolutionDir)ThirdParty\GLFW\Include;$(SolutionDir)ThirdParty\Glad\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Engine;$(SolutionDir)ThirdParty\stb\Include;$(SolutionDir)ThirdParty\glm\Include;$(SolutionDir)ThirdParty\ImGui\Include;$(SolutionDir)ThirdParty\spdlog\Include;$(SolutionDir)ThirdParty\GLFW\Include;$(SolutionDir)ThirdParty\Glad\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -128,7 +128,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Alex\Desktop\Neon\Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NEON_STATIC_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>

@@ -1,0 +1,84 @@
+﻿  stdafx.cpp
+  Application.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  Entry.h
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  Win32InputManager.cpp
+  Timer.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  Log.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  DrawCommand.cpp
+  OpenGLBuffer.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+  OpenGLContext.cpp
+C:\Users\Alex\Desktop\Neon-Engine\Engine\Graphics\OpenGL\OpenGLBuffer.cpp(45,28): warning C4267:  '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  Win32Window.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  OpenGLRendererAPI.cpp
+  OpenGLShader.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  OpenGLTexture.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  OpenGLVertexArray.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  Renderer.cpp
+  Buffer.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  Shader.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  Texture.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  VertexArray.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  RendererAPI.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  FileStream.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  Generating Code...
+  Compiling...
+  ComponentMask.cpp
+  Coponent.cpp
+  MeshRenderer.cpp
+  Transform.cpp
+  OthoCamera.cpp
+  PerspectiveCamera.cpp
+  GameObjectHandle.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message : C:\Users\Alex\Desktop\Neon-Engine\Engine\Graphics\Primitives\Texture.cpp(17) : warning C4715: 'Neon::Graphics::Texture::Create': not all control paths return a value
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message : C:\Users\Alex\Desktop\Neon-Engine\Engine\Graphics\Primitives\Shader.cpp(18) : warning C4715: 'Neon::Graphics::Shader::Create': not all control paths return a value
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message : C:\Users\Alex\Desktop\Neon-Engine\Engine\Graphics\Primitives\Buffer.cpp(17) : warning C4715: 'Neon::Graphics::VertexBuffer::Create': not all control paths return a value
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message : C:\Users\Alex\Desktop\Neon-Engine\Engine\Graphics\Primitives\Buffer.cpp(26) : warning C4715: 'Neon::Graphics::IndexBuffer::Create': not all control paths return a value
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message : C:\Users\Alex\Desktop\Neon-Engine\Engine\Core\Platform\Windows\Win32InputManager.cpp(33) : warning C4172: returning address of local variable or temporary: mousePos
+C:\Users\Alex\Desktop\Neon-Engine\Engine\World\GameObjectHandle.cpp(9,26): error C2039:  'Destroy': is not a member of 'Neon::World::GameObjectHandle'
+C:\Users\Alex\Desktop\Neon-Engine\Engine\World\GameObjectHandle.h(12): message :  see declaration of 'Neon::World::GameObjectHandle'
+  GameObjectManager.cpp
+  NodeHandle.cpp
+C:\Users\Alex\Desktop\Neon-Engine\Engine\World\GameObjectHandle.cpp(11,4): error C2065:  'mSceneNode': undeclared identifier
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  Scene.cpp
+  SceneHandle.cpp
+  SceneManager.cpp
+  SceneNode.cpp
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': macro redefinition
+  World.cpp
+  Generating Code...
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message :  see previous definition of 'APIENTRY'
+C:\Users\Alex\Desktop\Neon-Engine\ThirdParty\Glad\Include\glad\glad.h(32): message : C:\Users\Alex\Desktop\Neon-Engine\Engine\World\Scene\SceneNode.cpp(46) : warning C4715: 'Neon::World::SceneNode::GetChild': not all control paths return a value

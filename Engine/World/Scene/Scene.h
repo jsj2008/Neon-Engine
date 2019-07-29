@@ -10,42 +10,35 @@ namespace Neon
 {
 	namespace World
 	{
+		class SceneNodeRef;
 		class SceneNode;
-		class GameObjectHandle;
-		class NodeHandle;
 
 		class NEON_API Scene
 		{
 		private:
-			friend class NodeHandle; 
-			friend class SceneHandle;
 			friend class SceneNode;
+			friend class SceneManager;
 
-		public:
+		private:
 			std::vector<std::unique_ptr<Component::BaseComponentManager>> mComponentManagers;
-
-			std::map<GameObject, Component::ComponentMask> mGameObjectMasks;
-			std::unordered_map<std::string, SceneNode*> mSceneNodes;
-
+			
+			std::unique_ptr<SceneNode> mRootNode;
 			std::string mName;
+		
 		public:
 			Scene(const std::string& name);
 
-			NodeHandle GetRootNode();
+			SceneNodeRef GetRootNode();
 			
-			void Iterate(std::function<void(const GameObjectHandle& g)> lambda);
+			void IterateSceneNodes(std::function<void(const SceneNodeRef& node)> lambda);
 
 			~Scene();
 
 		private:
-			SceneNode* GetSceneNode(const std::string& name);
-
 			template <typename ComponentType>
 			Component::ComponentManager<ComponentType>* GetComponentManager();
-			
 		};
-		
-		
+
 		template<typename ComponentType>
 		inline Component::ComponentManager<ComponentType>* Scene::GetComponentManager()
 		{

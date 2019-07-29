@@ -1,41 +1,46 @@
 #include "stdafx.h"
 #include "Core/Log.h"
-#include "World/GameObjectHandle.h"
 #include "World/Components/ComponentMask.h"
 #include "World/GameObjectManager.h"
 #include "World/Components/Transform.h"
 #include "SceneNode.h"
 
+#include "SceneNodeRef.h"
+
 namespace Neon
 {
 	namespace World
 	{
-		SceneNode::SceneNode(Scene* scene, const std::string& name) : mName(name), mScene(scene)
+		SceneNode::SceneNode(Scene* scene, const std::string& name) : mName(name)
 		{
 			mGameObject = GameObjectManager::CreateGameObject();
-			
-			Component::ComponentMask mComponentMask;
-			mScene->mGameObjectMasks[mGameObject] = mComponentMask;
+			mScene = scene;
 
 			Component::Transform mTransform(glm::vec3(0.0f, 0.0f, 0.0f));
 			this->AddComponent<Component::Transform>(mTransform);
 		}
 
-		void SceneNode::CreateChild(const std::string& name)
+		SceneNodeRef SceneNode::CreateChildNode(const std::string& name)
 		{
-			NEON_ASSERT(mScene->mSceneNodes.count(name) == 0);
-			
-			mScene->mSceneNodes[name] = new SceneNode(mScene, name);
-			mChildren.push_back(name);
+			if (mChildren.count(name) == 0)
+			{
+				mChildren[name] = std::make_unique<SceneNode>(mScene, name);
+				mChildren[name]->SetParentNode(this);
+
+				return SceneNodeRef(mChildren[name].get());
+			}
+			else
+			{
+				Neon::Log::Warn("Child with name: " + name + " already exists!");
+			}
 		}
 		
-		SceneNode* SceneNode::GetChild(const std::string& name)
+		SceneNodeRef SceneNode::GetChildNode(const std::string& name)
 		{
-			NEON_ASSERT(mScene->mSceneNodes.count(name) > 0);
-			if (std::find(mChildren.begin(), mChildren.end(), name) != mChildren.end())
+			if (mChildren.count(name) > 0)
 			{
-				NEON_ASSERT(mScene->mSceneNodes[name] != nullptr);
-				return mScene->mSceneNodes[name];
+				NEON_ASSERT(mChildren[name] != nullptr);
+				return SceneNodeRef(mChildren[name].get());
 			}
 			else
 			{
@@ -45,12 +50,26 @@ namespace Neon
 			
 		}
 
-		void SceneNode::DeleteChild(const std::string& name)
+		void SceneNode::IterateChildren(std::function<void(const SceneNodeRef& node)> func)
 		{
-			if (std::find(mChildren.begin(), mChildren.end(), name) != mChildren.end())
+			for (const auto& child : mChildren)
 			{
-				delete mScene->mSceneNodes[name];
-				mScene->mSceneNodes.erase(name);
+				child.second->IterateChildren(func);
+			}
+
+			auto ref = SceneNodeRef(this);
+
+			func(ref);
+		}
+
+		SceneNode::SceneNode() = default;
+
+		void SceneNode::DeleteChildNode(const std::string& name)
+		{
+			if (mChildren.count(name) > 0)
+			{
+				mChildren[name].reset();
+				mChildren.erase(name);
 			}
 		}
 	}

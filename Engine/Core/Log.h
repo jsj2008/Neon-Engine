@@ -16,16 +16,16 @@ namespace Neon
 		static void Init();
 
 		static void Trace(const std::string& message);
-		static void Trace(int num) { Trace(std::to_string(num)); }
+		static void Trace(int num) { Log::Trace(std::to_string(num)); }
 		
 		static void Info(const std::string& message);
-		static void Info(int num) { Info(std::to_string(num)); }
+		static void Info(int num) { Log::Info(std::to_string(num)); }
 		
 		static void Warn(const std::string& message);
-		static void Warn(int num) { Warn(std::to_string(num)); }
+		static void Warn(int num) { Log::Warn(std::to_string(num)); }
 		
 		static void Critical(const std::string& message);
-		static void Critical(int num) { Critical(std::to_string(num)); }
+		static void Critical(int num) { Log::Critical(std::to_string(num)); }
 
 		~Log() { spdlog::shutdown(); }
 

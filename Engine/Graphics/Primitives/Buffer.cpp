@@ -14,6 +14,8 @@ namespace Neon
 			case None: Log::Warn("No Graphics API set!"); break;
 			case OpenGL: return std::make_shared<OpenGLVertexBuffer>(vertices); 
 			}
+
+			return nullptr;
 		}
 		
 		std::shared_ptr<IndexBuffer> IndexBuffer::Create(std::vector<unsigned int>& indices)
@@ -23,6 +25,8 @@ namespace Neon
 			case None: Log::Warn("No Graphics API set!"); break;
 			case OpenGL: return std::make_shared<OpenGLIndexBuffer>(indices);
 			}
+
+			return nullptr;
 		}
 	}
 }

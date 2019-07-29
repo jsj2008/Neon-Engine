@@ -1,0 +1,8 @@
+﻿  Source.cpp
+  Generating code
+C:\Users\Alex\Desktop\Neon\Engine\World\Scene\SceneNode.cpp(36): warning C4715: 'Neon::World::SceneNode::CreateChildNode': not all control paths return a value
+  821 of 5079 functions (16.2%) were compiled, the rest were copied from previous compilation.
+    643 functions were new in current compilation
+    405 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Sandbox.vcxproj -> C:\Users\Alex\Desktop\Neon\Binaries\SandboxRelease\Sandbox.exe

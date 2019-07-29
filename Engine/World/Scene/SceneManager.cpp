@@ -1,44 +1,47 @@
 #include "stdafx.h"
 #include "Scene.h"
-#include "SceneHandle.h"
-#include "World/World.h"
+#include "SceneRef.h"
+#include "SceneNode.h"
 #include "SceneManager.h"
 
 namespace Neon
 {
 	namespace World
 	{
-		void SceneManager::CreateScene(const std::string& name)
+		void SceneManager::CreateScene(const std::string& name, bool mActive)
 		{
-			mScenes[name] = new Scene(name);
+			mScenes[name] = std::make_unique<Scene>(name);
+			mSceneRefs[name] = SceneRef(name, this);
+
+			mActiveScene = mActive ? name : mActiveScene;
 		}
 
-		Scene* SceneManager::GetScene(const std::string& name)
+		SceneRef SceneManager::GetScene(const std::string& name)
 		{
 			NEON_ASSERT(mScenes.count(name) > 0);
-			return mScenes[name];
+			return mSceneRefs[name];
+		}
+
+		SceneRef SceneManager::GetActiveScene()
+		{
+			return mSceneRefs[mActiveScene];
+		}
+
+		SceneManager::~SceneManager()
+		{
+			mSceneRefs.clear();
+			mScenes.clear();
+		}
+
+		Scene* SceneManager::GetScenePtr(const std::string& name)
+		{
+			return mScenes[name].get();
 		}
 
 		void SceneManager::DeleteScene(const std::string& name)
 		{
 			if (mScenes.count(name) > 0)
-				delete mScenes.at(name);
-		}
-
-		void SceneManager::Iterate(World* world, std::function<void(const SceneHandle& scene)> lambda)
-		{
-			for (auto& kv : mScenes)
-			{
-				lambda(SceneHandle(world, kv.second));
-			}
-		}
-
-		SceneManager::~SceneManager()
-		{
-			for (auto it = mScenes.begin(); it != mScenes.end(); it++)
-			{
-				delete (*it).second;
-			}
+				mScenes.at(name).reset();
 		}
 	}
 }

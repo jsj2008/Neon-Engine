@@ -105,22 +105,16 @@
     <ClCompile Include="World\Components\ComponentMask.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="World\World.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="World\Scene\NodeHandle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="World\Scene\SceneHandle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="World\Components\Coponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="World\GameObjectManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="World\Components\MeshRenderer.cpp">
+    <ClCompile Include="World\Scene\SceneNodeRef.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="World\Scene\SceneRef.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -257,22 +251,13 @@
     <ClInclude Include="World\GameObjectManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="World\World.h">
+    <ClInclude Include="World\Components\ComponentRef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="World\Scene\SceneHandle.h">
+    <ClInclude Include="World\Scene\SceneRef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="World\Scene\NodeHandle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="World\Components\ComponentHandle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="World\GameObjectHandle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="World\Components\MeshRenderer.h">
+    <ClInclude Include="World\Scene\SceneNodeRef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,8 +6,8 @@
 #include "Graphics/Primitives/VertexArray.h"
 #include "World/Camera/PerspectiveCamera.h"
 #include "World/Camera/OthoCamera.h"
+#include "World/Scene/SceneManager.h"
 #include "World/Scene/Scene.h"
-#include "World/World.h"
 #include "World/Scene/SceneNode.h"
 #include "Event/EventBus.h"
 #include "Log.h"
@@ -46,7 +46,7 @@ namespace Neon
 		protected:
 			std::shared_ptr<Event::EventBus> m_pBus;
 			std::shared_ptr<Window> m_Window;
-			std::unique_ptr<World::World> mWorld;
+			std::unique_ptr<World::SceneManager> mSceneManager;
 
 			bool m_isRunning = true;
 			double deltaTime;

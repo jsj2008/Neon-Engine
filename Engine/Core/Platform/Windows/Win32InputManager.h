@@ -19,7 +19,7 @@ namespace Neon
 
 				static bool GetKey(int keycode);
 
-				static glm::vec2& GetMousePos();
+				static glm::vec2 GetMousePos();
 
 				~Win32InputManager() = default;
 

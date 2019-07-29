@@ -20,7 +20,7 @@ namespace Neon
 				return (glfwGetKey(window, keycode) == GLFW_PRESS);
 			}
 			
-			glm::vec2& Win32InputManager::GetMousePos()
+			glm::vec2 Win32InputManager::GetMousePos()
 			{
 				GLFWwindow* window = static_cast<GLFWwindow*>(m_pWindow->GetWindowHandle());
 				
@@ -29,8 +29,7 @@ namespace Neon
 				
 				glfwGetCursorPos(window, &xpos, &ypos);
 
-				glm::vec2 mousePos(xpos, ypos);
-				return mousePos;
+				return glm::vec2(xpos, ypos);
 			}
 		}
 	}

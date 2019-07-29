@@ -28,7 +28,7 @@ namespace Neon
 			std::bitset<32> mSystemSignature;
 
 			std::vector<World::GameObject> mGameobjects;
-			World::Scene* mScene;
+			std::shared_ptr<World::Scene> mScene;
 		};
 		
 	}

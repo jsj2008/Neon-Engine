@@ -3,29 +3,32 @@
 #include "stdafx.h"
 #include "Scene.h"
 #include "Core/Config.h"
-#include "World/Components/ComponentHandle.h"
+#include "World/Components/ComponentRef.h"
 #include "World/GameObject.h"
 
 namespace Neon
 {
 	namespace World
 	{
+		class SceneNodeRef;
+		
 		class NEON_API SceneNode
 		{
 		private:
 			friend class Scene;
-			friend class GameObjectHandle;
-			friend class NodeHandle;
+			friend class SceneManager;
 
 		public:
 			SceneNode(Scene* scene, const std::string& name);
 
-			void SetParent(const std::string& name) { mParent = name; }
+			void SetParentNode(SceneNode* node) { mParent = node; }
 
-			void CreateChild(const std::string& name);
-			void DeleteChild(const std::string& name);
+			SceneNodeRef CreateChildNode(const std::string& name);
+			void DeleteChildNode(const std::string& name);
 
-			SceneNode* GetChild(const std::string& name);
+			SceneNodeRef GetChildNode(const std::string& name);
+
+			void IterateChildren(std::function<void(const SceneNodeRef& node)> func);
 
 			template <typename ComponentType>
 			void AddComponent(ComponentType c);
@@ -37,26 +40,28 @@ namespace Neon
 			void SetComponent(ComponentType newc);
 
 			template <typename ComponentType>
-			Component::ComponentHandle<ComponentType> GetComponent();
+			Component::ComponentRef<ComponentType> GetComponent() const;
+
+			SceneNode();
 
 		private:
-			std::string mParent;
-			std::vector<std::string> mChildren;
-			
-			std::string mName;
-
+			SceneNode* mParent;
 			Scene* mScene;
 
+			Component::ComponentMask mGameObjectMask;
+			std::string mName;
+
+			std::unordered_map<std::string, std::unique_ptr<SceneNode>> mChildren;
 		public:
 			GameObject mGameObject;
 		};
-		
+
 		template<typename ComponentType>
 		inline void SceneNode::AddComponent(ComponentType c)
 		{
 			Component::ComponentManager<ComponentType>* manager = mScene->GetComponentManager<ComponentType>();
 			manager->AddComponent(mGameObject, c);
-			mScene->mGameObjectMasks[mGameObject].AddComponent<ComponentType>();
+			mGameObjectMask.AddComponent<ComponentType>();
 		}
 		
 		template<typename ComponentType>
@@ -65,7 +70,7 @@ namespace Neon
 			Component::ComponentManager<ComponentType>* manager = mScene->GetComponentManager<ComponentType>();
 			manager->RemoveComponent(mGameObject);
 
-			mScene->mGameObjectMasks[mGameObject].RemoveComponent<ComponentType>();
+			mGameObjectMask.RemoveComponent<ComponentType>();
 		}
 
 		template<typename ComponentType>
@@ -76,10 +81,10 @@ namespace Neon
 		}
 		
 		template<typename ComponentType>
-		inline Component::ComponentHandle<ComponentType> SceneNode::GetComponent()
+		inline Component::ComponentRef<ComponentType> SceneNode::GetComponent() const
 		{
 			Component::ComponentManager<ComponentType>* manager = mScene->GetComponentManager<ComponentType>();
-			return Component::ComponentHandle<ComponentType>(manager, mGameObject);
+			return Component::ComponentRef<ComponentType>(manager, mGameObject);
 			
 		}
 	}

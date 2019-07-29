@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/Config.h"
+#include <vector>
 
 namespace Neon
 {

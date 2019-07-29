@@ -137,17 +137,15 @@
     </ClCompile>
     <ClCompile Include="World\Components\ComponentMask.cpp" />
     <ClCompile Include="World\Components\Coponent.cpp" />
-    <ClCompile Include="World\Components\MeshRenderer.cpp" />
     <ClCompile Include="World\Components\Transform.cpp" />
     <ClCompile Include="World\Camera\OthoCamera.cpp" />
     <ClCompile Include="World\Camera\PerspectiveCamera.cpp" />
     <ClCompile Include="World\GameObjectManager.cpp" />
-    <ClCompile Include="World\Scene\NodeHandle.cpp" />
     <ClCompile Include="World\Scene\Scene.cpp" />
-    <ClCompile Include="World\Scene\SceneHandle.cpp" />
     <ClCompile Include="World\Scene\SceneManager.cpp" />
     <ClCompile Include="World\Scene\SceneNode.cpp" />
-    <ClCompile Include="World\World.cpp" />
+    <ClCompile Include="World\Scene\SceneNodeRef.cpp" />
+    <ClCompile Include="World\Scene\SceneRef.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Application.h" />
@@ -184,22 +182,19 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Neon.h" />
     <ClInclude Include="World\Components\Component.h" />
-    <ClInclude Include="World\Components\ComponentHandle.h" />
+    <ClInclude Include="World\Components\ComponentRef.h" />
     <ClInclude Include="World\Components\ComponentManager.h" />
     <ClInclude Include="World\Components\ComponentMask.h" />
-    <ClInclude Include="World\Components\MeshRenderer.h" />
     <ClInclude Include="World\Components\Transform.h" />
     <ClInclude Include="World\Camera\OthoCamera.h" />
     <ClInclude Include="World\Camera\PerspectiveCamera.h" />
     <ClInclude Include="World\GameObject.h" />
-    <ClInclude Include="World\GameObjectHandle.h" />
     <ClInclude Include="World\GameObjectManager.h" />
-    <ClInclude Include="World\Scene\NodeHandle.h" />
     <ClInclude Include="World\Scene\Scene.h" />
-    <ClInclude Include="World\Scene\SceneHandle.h" />
     <ClInclude Include="World\Scene\SceneManager.h" />
     <ClInclude Include="World\Scene\SceneNode.h" />
-    <ClInclude Include="World\World.h" />
+    <ClInclude Include="World\Scene\SceneNodeRef.h" />
+    <ClInclude Include="World\Scene\SceneRef.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

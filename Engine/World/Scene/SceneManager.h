@@ -2,31 +2,38 @@
 
 #include "stdafx.h"
 #include "Core/Config.h"
+#include "SceneRef.h"
 
 namespace Neon
 {
 	namespace World
 	{
 		class Scene;
-		class World;
-		class SceneHandle;
 		
 		class NEON_API SceneManager
 		{
+		private:
+			friend class SceneRef;
+
 		public:
 			SceneManager() = default;
 
-			void CreateScene(const std::string& name);
-			Scene* GetScene(const std::string& name);
-
+			void CreateScene(const std::string& name, bool mActive = true);
 			void DeleteScene(const std::string& name);
-			void Iterate(World* world, std::function<void(const SceneHandle& scene)> lambda);
 
+			SceneRef GetScene(const std::string& name);
+			SceneRef GetActiveScene();
+			
 			~SceneManager();
 
 		private:
-			std::unordered_map<std::string, Scene*> mScenes;
+			Scene* GetScenePtr(const std::string& name);
 
+		private:
+			std::unordered_map<std::string, std::unique_ptr<Scene>> mScenes;
+			std::unordered_map<std::string, SceneRef> mSceneRefs;
+
+			std::string mActiveScene;
 		};
 	}
 }
