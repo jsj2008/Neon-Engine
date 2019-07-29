@@ -1,15 +1,18 @@
 # Neon-Engine
+
 The Neon Game Engine is an experimental project using OpenGL Rendering API.
-It's goal is to create an easy to use Unity-like engine for the user.
+It's goal is to create an easy to use engine for the user. It is mainly written
+in C++ but scripting in Python is planned for the future. 
 
 The project is at an early development stage and there is a lot of work to be done.
 Currently only basic 2D and 3D objects are suppported but model loading is planned for the future.
-Also there is exprimental support for ECS (Entity Component System) which uses a Data Oriented Desing behind the scenes.
+Also there is paartial support for ECS (Entity Component System) which uses a Data Oriented Design
+for improved performace and reliability.
 
-Current Progress:
+# Current Progress:
 ![Screenshot](Screenshots/Quad.png)
 
-Here is a sample program which outputs the above:
+# Sample Program
 ``` 
 #include <Neon.h>
 
@@ -21,7 +24,7 @@ using namespace Neon::Component;
 class MyApp : public Neon::Application::Application
 {
 public:
-	MyApp() : camera(glm::vec3(0.0f, 0.0f, -6.0f)), orthoCamera(-1.6f, 1.6f, -1.2f, 1.2f) {}
+	MyApp() : orthoCamera(-1.6f, 1.6f, -1.2f, 1.2f) {}
 
 	/* This method gets called when the appliction is created.*/
 	void Start() override
@@ -94,29 +97,22 @@ public:
 		/* Example use of the InputManager for camera controls */
 		if (Input::InputManager::GetKey(NEON_KEY_W))
 		{
-			m_CameraPosition += camera.GetFrontVector() * camera.GetCameraSpeed();
 			m_OrthoPosition.y += 2.0f * (float)deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_S))
 		{
-			m_CameraPosition -= camera.GetFrontVector() * camera.GetCameraSpeed();
 			m_OrthoPosition.y -= 2.0f * (float)deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_A))
 		{
-			m_CameraPosition -= camera.GetRightVector() * camera.GetCameraSpeed();
 			m_OrthoPosition.x -= 2.0f * (float)deltaTime;
 		}
 		if (Input::InputManager::GetKey(NEON_KEY_D))
 		{
-			m_CameraPosition += camera.GetRightVector() * camera.GetCameraSpeed();
 			m_OrthoPosition.x += 2.0f * (float)deltaTime;
 		}
 
 		orthoCamera.SetPosition(m_OrthoPosition);
-
-		camera.SetPosition(m_CameraPosition);
-		camera.ProcessMouseMovement();
 	}
 
 	void OnRender() override
@@ -128,7 +124,6 @@ public:
 		Graphics::DrawCommand::ClearBuffer(0.1f, 0.2f, 0.3f, 1.0f);
 
 		/* Iterating over the scenes and drawing all the gameObjects */
-		/* NOTE: this is temporary. In the future only the active scene will be rendered! */
 		/* Due to the lack of a Mesh component the use of a manually creared mesh (vertexArray) is required! */
 		mSceneManager->GetActiveScene()->IterateSceneNodes([this](const World::SceneNodeRef& node)
 		{
@@ -151,9 +146,6 @@ private:
 
 	World::OrthoCamera orthoCamera;
 	glm::vec3 m_OrthoPosition = glm::vec3(0.0f);
-
-	World::PerspectiveCamera camera;
-	glm::vec3 m_CameraPosition = glm::vec3(0.0f);
 };
 
 /* Sets your application as the current active application */
