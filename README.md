@@ -48,7 +48,7 @@ public:
 		};
 		
 		/* This is the creation of a basic set of shaders */
-		/* NOTE: In the future shader files will be created at runtime! */
+		/* NOTE: In the future shader files will be created at runtime by materials! */
 		std::string vertPath = "Engine/Graphics/Shaders/BasicVertex.glsl";
 		std::string fragPath = "Engine/Graphics/Shaders/BasicFrag.glsl";
 		shader = Graphics::Shader::Create(vertPath, fragPath);
