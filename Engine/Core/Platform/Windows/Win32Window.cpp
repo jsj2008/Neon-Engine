@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Win32Window.h"
+#include "stb_image.h"
 #include "Core/Log.h"
 
 namespace Neon
@@ -35,6 +36,12 @@ namespace Neon
 			glfwWindowHint(GLFW_SAMPLES, 4);
 
 			m_WindowHandle = glfwCreateWindow(m_Width, m_Height, m_title.c_str(), NULL, NULL);
+			
+			GLFWimage icons[1];
+			icons[0].pixels = stbi_load(std::string(NEON_ENGINE_PATH + "Neon.png").c_str(), &icons[0].width, &icons[0].height, 0, 4);
+			
+			glfwSetWindowIcon(m_WindowHandle, 1, icons);
+			stbi_image_free(icons[0].pixels);
 
 			m_pContext = std::make_shared<Graphics::OpenGLContext>(m_WindowHandle);
 			m_pContext->Init();
@@ -102,6 +109,12 @@ namespace Neon
 						break;
 					}
 				}
+			});
+
+			glfwSetWindowSizeCallback(m_WindowHandle, [](GLFWwindow* window, int width, int height) 
+			{
+				Win32Window* this_ptr = (Win32Window*)glfwGetWindowUserPointer(window);
+				this_ptr->SetDimetions(glm::vec2(width, height));
 			});
 		}
 	}

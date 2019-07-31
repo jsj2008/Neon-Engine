@@ -22,6 +22,9 @@ namespace Neon
 
 			std::shared_ptr<Context> GetContext() override { return m_pContext; }
 
+			glm::vec2 GetDimetions() override { return glm::vec2(m_Width, m_Height); }
+			void SetDimetions(const glm::vec2& dim) { m_Width = dim.x; m_Height = dim.y; }
+
 			void SetVSync(bool value) override;
 
 			~Win32Window();

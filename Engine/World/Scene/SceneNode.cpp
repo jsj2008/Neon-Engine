@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Core/Log.h"
-#include "World/Components/ComponentMask.h"
+#include "World/Component/ComponentMask.h"
 #include "World/GameObjectManager.h"
 #include "World/Components/Transform.h"
 #include "SceneNode.h"
@@ -57,9 +57,11 @@ namespace Neon
 				child.second->IterateChildren(func);
 			}
 
-			auto ref = SceneNodeRef(this);
-
-			func(ref);
+			if (mName != "Root")
+			{
+				auto ref = SceneNodeRef(this);
+				func(ref);
+			}
 		}
 
 		SceneNode::SceneNode() = default;

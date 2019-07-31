@@ -9,6 +9,7 @@
 #include "Primitives/VertexArray.h"
 #include "DrawCommand.h"
 #include "World/Components/Transform.h"
+#include "World/Components/Mesh.h"
 
 namespace Neon
 {

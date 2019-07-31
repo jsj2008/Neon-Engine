@@ -2,9 +2,9 @@
 
 #include "stdafx.h"
 #include "Core/Config.h"
-#include "World/Components/ComponentManager.h"
-#include "World/Components/Component.h"
-#include "World/Components/ComponentMask.h"
+#include "World/Component/ComponentManager.h"
+#include "World/Component/Component.h"
+#include "World/Component/ComponentMask.h"
 
 namespace Neon
 {

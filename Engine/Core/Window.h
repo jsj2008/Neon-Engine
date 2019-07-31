@@ -24,6 +24,9 @@ namespace Neon
 
 			virtual void SetVSync(bool value) {}
 
+			virtual glm::vec2 GetDimetions() = 0;
+			virtual void SetDimetions(const glm::vec2& dim) = 0;
+
 			virtual ~Window() = default;
 
 		private:

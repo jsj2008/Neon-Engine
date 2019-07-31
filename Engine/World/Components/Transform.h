@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Core/Config.h"
-#include "Component.h"
+#include "World/Component/Component.h"
 #include "glm/glm.hpp"
 
 namespace Neon
@@ -16,7 +16,7 @@ namespace Neon
 			Transform(glm::vec3 position, glm::vec3 scale);
 
 			void SetPosition(glm::vec3 pos) { m_Position = pos; CalculateModelMatrix(); }
-			glm::vec3 GetPosition() const { return m_Position; }
+			glm::vec3& GetPosition() { return m_Position; }
 
 			void SetScale(glm::vec3 scale) { m_Scale = scale; CalculateModelMatrix(); }
 			glm::vec3 GetScale() const { return m_Scale; }
@@ -26,10 +26,10 @@ namespace Neon
 			void OnAttach() {}
 			void OnDettach() {}
 
-		private:
+		public:
 			void CalculateModelMatrix();
 
-		private:
+		public:
 			glm::vec3 m_Position = glm::vec3(0.0f);
 			glm::vec3 m_Scale = glm::vec3(1.0f);
 

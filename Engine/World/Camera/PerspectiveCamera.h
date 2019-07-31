@@ -34,6 +34,8 @@ namespace Neon
 			glm::vec3& GetFrontVector() { return m_Front; }
 			glm::vec3& GetRightVector() { return m_Right; }
 
+			void SetAspectRatio(const glm::vec2& dim) { m_ProjectionMatrix = glm::perspective(glm::radians(45.0f), dim.x / dim.y, 0.1f, 100.0f); m_ProjectionViewMatrix = m_ProjectionMatrix * m_ViewMatrix; }
+
 			void SetCameraSpeed(float speed) { m_CameraSpeed = speed; }
 			float GetCameraSpeed() const { return m_CameraSpeed; }
 

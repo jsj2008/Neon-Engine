@@ -14,25 +14,56 @@ public:
 	void Start() override
 	{
 		/* This is the array of vertices that make up the quad.*/
-		/* NOTE: This is temporary and will be replaced by a Mesh component! */
-		std::vector<float> vertices = 
-		{
-			 /* Positions			    Colors*/
-			 0.5f,  0.5f, 0.0f,		1.0f, 0.0f, 0.0f,
-			 0.5f, -0.5f, 0.0f,		0.0f, 1.0f, 0.0f,
-			-0.5f, -0.5f, 0.0f,		0.0f, 0.0f, 1.0f,
-			-0.5f,  0.5f, 0.0f,		1.0f, 0.0f, 0.0f
+		std::vector<float> vertices = {
+				-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1.0f,
+				 0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 1.0f,
+				 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 0.0f,
+				 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 0.0f,
+				-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 1.0f,
+				-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1.0f,
+
+				-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f,
+				 0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f,
+				 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 0.0f,
+				 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 0.0f,
+				-0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f,
+				-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f,
+
+				-0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f,
+				-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 0.0f,
+				-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 1.0f,
+				-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 1.0f,
+				-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f,
+				-0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f,
+
+				 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f,
+				 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 0.0f,
+				 0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 1.0f,
+				 0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f,
+				 0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f,
+				 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 1.0f,
+
+				-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f,
+				 0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,
+				 0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 1.0f,
+				 0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f,
+				-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f,
+				-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f,
+
+				-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f,
+				 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,
+				 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f,
+				 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 1.0f,
+				-0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.0f,
+				-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f
 		};
 
 		/* The indices used for indexed drawing */
-		std::vector<unsigned int> indices = 
-		{
-			0, 1, 3,
-			1, 2, 3
-		};
+		std::vector<unsigned int> indices;
+		for (unsigned int i = 0; i < 36; i++) indices.push_back(i);
 		
 		/* This is the creation of a basic set of shaders */
-		/* NOTE: In the future shader files will be created at runtime! */
+		/* NOTE: In the future shader files will be created at runtime by materials! */
 		std::string vertPath = "Engine/Graphics/Shaders/BasicVertex.glsl";
 		std::string fragPath = "Engine/Graphics/Shaders/BasicFrag.glsl";
 		shader = Graphics::Shader::Create(vertPath, fragPath);
@@ -43,20 +74,8 @@ public:
 			{ Graphics::ShaderType::Float3, "inPos" },
 			{ Graphics::ShaderType::Float3, "inColor" }
 		};
-		
-		/* Creation of a Vertex Array Object (OpenGL ONLY!) */
-		vertexArray = Graphics::VertexArray::Create();
 
-		std::shared_ptr<Graphics::VertexBuffer> vertex = Graphics::VertexBuffer::Create(vertices);
-		vertex->SetLayout(layout);
-
-		std::shared_ptr<Graphics::IndexBuffer> index = Graphics::IndexBuffer::Create(indices);
-
-		/* Attaching to the VAO the vertex buffer and the index buffer */
-		vertexArray->AddVertexBuffer(vertex);
-		vertexArray->AddIndexBuffer(index);
-
-		vertexArray->Unbind();
+		Mesh meshComponent = Mesh(vertices, indices, layout);
 
 		/* Creating a new scene in the world */
 		mSceneManager->CreateScene("Test");
@@ -73,54 +92,65 @@ public:
 		node1->SetComponent<Transform>(Transform(glm::vec3(-1.5f, 0.0f, 0.0f)));
 		node2->SetComponent<Transform>(Transform(glm::vec3(0.0f, 0.0f, 0.0f)));
 		node2->SetComponent<Transform>(Transform(glm::vec3(1.5f, 0.0f, 0.0f)));
+
+		node1->AddComponent<Mesh>(meshComponent);
+		node2->AddComponent<Mesh>(meshComponent);
+		node3->AddComponent<Mesh>(meshComponent);
 	}
 	
 	/* This method is called on every simulation step */
 	void OnUpdate() override
 	{
 		/* Example use of the InputManager for camera controls */
-		if (Input::InputManager::GetKey(NEON_KEY_W))
+		if (!Input::InputManager::GetKey(NEON_KEY_H))
 		{
-			m_CameraPosition += camera.GetFrontVector() * camera.GetCameraSpeed();
-			m_OrthoPosition.y += 2.0f * (float)deltaTime;
-		}
-		if (Input::InputManager::GetKey(NEON_KEY_S))
-		{
-			m_CameraPosition -= camera.GetFrontVector() * camera.GetCameraSpeed();
-			m_OrthoPosition.y -= 2.0f * (float)deltaTime;
-		}
-		if (Input::InputManager::GetKey(NEON_KEY_A))
-		{
-			m_CameraPosition -= camera.GetRightVector() * camera.GetCameraSpeed();
-			m_OrthoPosition.x -= 2.0f * (float)deltaTime;
-		}
-		if (Input::InputManager::GetKey(NEON_KEY_D))
-		{
-			m_CameraPosition += camera.GetRightVector() * camera.GetCameraSpeed();
-			m_OrthoPosition.x += 2.0f * (float)deltaTime;
-		}
+			if (Input::InputManager::GetKey(NEON_KEY_W))
+			{
+				m_CameraPosition += camera.GetFrontVector() * camera.GetCameraSpeed();
+				m_OrthoPosition.y += 2.0f * (float)deltaTime;
+			}
+			else if (Input::InputManager::GetKey(NEON_KEY_S))
+			{
+				m_CameraPosition -= camera.GetFrontVector() * camera.GetCameraSpeed();
+				m_OrthoPosition.y -= 2.0f * (float)deltaTime;
+			}
+			else if (Input::InputManager::GetKey(NEON_KEY_A))
+			{
+				m_CameraPosition -= camera.GetRightVector() * camera.GetCameraSpeed();
+				m_OrthoPosition.x -= 2.0f * (float)deltaTime;
+			}
+			else if (Input::InputManager::GetKey(NEON_KEY_D))
+			{
+				m_CameraPosition += camera.GetRightVector() * camera.GetCameraSpeed();
+				m_OrthoPosition.x += 2.0f * (float)deltaTime;
+			}
 
-		orthoCamera.SetPosition(m_OrthoPosition);
+			orthoCamera.SetPosition(m_OrthoPosition);
 
-		camera.SetPosition(m_CameraPosition);
-		camera.ProcessMouseMovement();
+			camera.SetPosition(m_CameraPosition);
+			camera.ProcessMouseMovement();
+		}
 	}
 
 	void OnRender() override
 	{
+		/* Adjust the aspect ratio of the projection */
+		camera.SetAspectRatio(m_Window->GetDimetions());
+		
 		/* Neon's rendering pipeline */
-		/* NOTE: this is temporary. In the future this will be done automatically with the Mesh component! */
-		Graphics::Renderer::StartScene(orthoCamera);
+		Graphics::Renderer::StartScene(camera);
 
-		Graphics::DrawCommand::ClearBuffer(0.1f, 0.2f, 0.3f, 1.0f);
+		Graphics::DrawCommand::ClearBuffer(0.0f, 0.4f, 0.9f, 1.0f);
 
-		/* Iterating over the scenes and drawing all the gameObjects */
-		/* NOTE: this is temporary. In the future only the active scene will be rendered! */
-		/* Due to the lack of a Mesh component the use of a manually creared mesh (vertexArray) is required! */
+		/* Iterating over the sceneNodes of the active scene and drawing all the gameObjects */
+		/* In the future I think that a better way to do this is to render in the EndScene() method */
+		/* and have this Submit() call push back draw calls to a render queue that can later can be ex. sorted by material */
 		mSceneManager->GetActiveScene()->IterateSceneNodes([this](const World::SceneNodeRef& node)
 		{
 			ComponentRef<Transform> transform = node->GetComponent<Transform>();
-			Graphics::Renderer::Submit(vertexArray, shader, transform->GetModelMatrix());
+			ComponentRef<Mesh> mesh = node->GetComponent<Mesh>();
+
+			Graphics::Renderer::Submit(mesh->GetVertexArray(), shader, transform->GetModelMatrix());
 		});
 
 		Graphics::Renderer::EndScene();
@@ -133,7 +163,6 @@ public:
 	}
 
 private:
-	std::shared_ptr<Graphics::VertexArray> vertexArray;
 	std::shared_ptr<Graphics::Shader> shader;
 
 	World::OrthoCamera orthoCamera;

@@ -45,14 +45,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Binaries\$(ProjectName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Binaries\$(ProjectName)$(Configuration)\Intermediate\</IntDir>
-    <IncludePath>$(SolutionDir)ThirdParty\stb\Include;$(SolutionDir)ThirdParty\glm\Include;$(SolutionDir)ThirdParty\ImGui\Include;$(SolutionDir)Engine;$(SolutionDir)ThirdParty\spdlog\Include;$(SolutionDir)ThirdParty\GLFW\Include;$(SolutionDir)ThirdParty\Glad\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ThirdParty\spdlog\Lib\Debug;$(SolutionDir)ThirdParty\GLFW\Lib\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Alex\Desktop\Neon\ThirdParty\freetype\Include;$(SolutionDir)ThirdParty\stb\Include;$(SolutionDir)ThirdParty\glm\Include;$(SolutionDir)ThirdParty\ImGui\Include;$(SolutionDir)Engine;$(SolutionDir)ThirdParty\spdlog\Include;$(SolutionDir)ThirdParty\GLFW\Include;$(SolutionDir)ThirdParty\Glad\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Alex\Desktop\Neon\ThirdParty\freetype\Lib;$(SolutionDir)ThirdParty\spdlog\Lib\Debug;$(SolutionDir)ThirdParty\GLFW\Lib\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Binaries\$(ProjectName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Binaries\$(ProjectName)$(Configuration)\Intermediate\</IntDir>
-    <IncludePath>$(SolutionDir)ThirdParty\stb\Include;$(SolutionDir)ThirdParty\glm\Include;$(SolutionDir)ThirdParty\ImGui\Include;$(SolutionDir)Engine;$(SolutionDir)ThirdParty\spdlog\Include;$(SolutionDir)ThirdParty\GLFW\Include;$(SolutionDir)ThirdParty\Glad\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ThirdParty\spdlog\Lib\Release;$(SolutionDir)ThirdParty\GLFW\Lib\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Alex\Desktop\Neon\ThirdParty\freetype\Include;$(SolutionDir)ThirdParty\stb\Include;$(SolutionDir)ThirdParty\glm\Include;$(SolutionDir)ThirdParty\ImGui\Include;$(SolutionDir)Engine;$(SolutionDir)ThirdParty\spdlog\Include;$(SolutionDir)ThirdParty\GLFW\Include;$(SolutionDir)ThirdParty\Glad\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Alex\Desktop\Neon\ThirdParty\freetype\Lib;$(SolutionDir)ThirdParty\spdlog\Lib\Release;$(SolutionDir)ThirdParty\GLFW\Lib\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -69,7 +69,7 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <Lib>
-      <AdditionalDependencies>spdlog.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;spdlog.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
@@ -95,7 +95,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>spdlog.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;spdlog.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
@@ -121,6 +121,34 @@
     <ClCompile Include="Graphics\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="Graphics\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="Graphics\Renderer.cpp" />
+    <ClCompile Include="GUI\ImGui\imgui.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="GUI\ImGui\imgui_demo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="GUI\ImGui\imgui_draw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="GUI\ImGui\imgui_freetype.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="GUI\ImGui\imgui_impl_glfw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="GUI\ImGui\imgui_impl_opengl3.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="GUI\ImGui\imgui_widgets.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="stb_image.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -135,8 +163,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="World\Components\ComponentMask.cpp" />
-    <ClCompile Include="World\Components\Coponent.cpp" />
+    <ClCompile Include="World\Components\Mesh.cpp" />
+    <ClCompile Include="World\Component\ComponentMask.cpp" />
+    <ClCompile Include="World\Component\Coponent.cpp" />
     <ClCompile Include="World\Components\Transform.cpp" />
     <ClCompile Include="World\Camera\OthoCamera.cpp" />
     <ClCompile Include="World\Camera\PerspectiveCamera.cpp" />
@@ -151,6 +180,7 @@
     <ClInclude Include="Core\Application.h" />
     <ClInclude Include="Core\Config.h" />
     <ClInclude Include="Core\Context.h" />
+    <ClInclude Include="Core\CoreContext.h" />
     <ClInclude Include="Core\Event\Event.h" />
     <ClInclude Include="Core\Event\EventBus.h" />
     <ClInclude Include="Core\Event\KeyEvent.h" />
@@ -178,13 +208,23 @@
     <ClInclude Include="Graphics\Primitives\BufferLayout.h" />
     <ClInclude Include="Graphics\Primitives\Shader.h" />
     <ClInclude Include="Graphics\Primitives\VertexArray.h" />
+    <ClInclude Include="GUI\ImGui\imconfig.h" />
+    <ClInclude Include="GUI\ImGui\imgui.h" />
+    <ClInclude Include="GUI\ImGui\imgui_freetype.h" />
+    <ClInclude Include="GUI\ImGui\imgui_impl_glfw.h" />
+    <ClInclude Include="GUI\ImGui\imgui_impl_opengl3.h" />
+    <ClInclude Include="GUI\ImGui\imgui_internal.h" />
+    <ClInclude Include="GUI\ImGui\imstb_rectpack.h" />
+    <ClInclude Include="GUI\ImGui\imstb_textedit.h" />
+    <ClInclude Include="GUI\ImGui\imstb_truetype.h" />
     <ClInclude Include="IO\FileStream.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Neon.h" />
-    <ClInclude Include="World\Components\Component.h" />
-    <ClInclude Include="World\Components\ComponentRef.h" />
-    <ClInclude Include="World\Components\ComponentManager.h" />
-    <ClInclude Include="World\Components\ComponentMask.h" />
+    <ClInclude Include="World\Components\Mesh.h" />
+    <ClInclude Include="World\Component\Component.h" />
+    <ClInclude Include="World\Component\ComponentRef.h" />
+    <ClInclude Include="World\Component\ComponentManager.h" />
+    <ClInclude Include="World\Component\ComponentMask.h" />
     <ClInclude Include="World\Components\Transform.h" />
     <ClInclude Include="World\Camera\OthoCamera.h" />
     <ClInclude Include="World\Camera\PerspectiveCamera.h" />
@@ -200,6 +240,10 @@
     <None Include="cpp.hint" />
     <None Include="Graphics\Shaders\BasicFrag.glsl" />
     <None Include="Graphics\Shaders\BasicVertex.glsl" />
+    <None Include="GUI\ImGui\.editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="GUI\ImGui\LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

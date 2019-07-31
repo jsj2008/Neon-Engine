@@ -24,8 +24,11 @@ namespace Neon
 			shader->UploadUniformMat4("u_ProjectionView", m_SceneData->m_ViewProjectionMatrix);
 			shader->UploadUniformMat4("u_ModelMatrix", model);
 
-			vertexArray->Bind();
-			DrawCommand::DrawIndexed(vertexArray);
+			if (vertexArray != nullptr)
+			{
+				vertexArray->Bind();
+				DrawCommand::DrawIndexed(vertexArray);
+			}
 		}
 	}
 }

@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "Scene.h"
 #include "Core/Config.h"
-#include "World/Components/ComponentRef.h"
+#include "World/Component/ComponentRef.h"
 #include "World/GameObject.h"
 
 namespace Neon
@@ -22,6 +22,7 @@ namespace Neon
 			SceneNode(Scene* scene, const std::string& name);
 
 			void SetParentNode(SceneNode* node) { mParent = node; }
+			std::string& GetName() { return mName; }
 
 			SceneNodeRef CreateChildNode(const std::string& name);
 			void DeleteChildNode(const std::string& name);

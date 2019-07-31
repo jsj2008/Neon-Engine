@@ -72,12 +72,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Binaries\$(ProjectName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Binaries\$(ProjectName)$(Configuration)\Intermediate\</IntDir>
-    <IncludePath>$(SolutionDir)ThirdParty\stb\Include;$(SolutionDir)ThirdParty\glm\Include;$(SolutionDir)ThirdParty\ImGui\Include;$(SolutionDir)ThirdParty\spdlog\Include;$(SolutionDir)ThirdParty\GLFW\Include;$(SolutionDir)ThirdParty\Glad\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\freetype\Include;$(SolutionDir)Engine;$(SolutionDir)ThirdParty\stb\Include;$(SolutionDir)ThirdParty\glm\Include;$(SolutionDir)ThirdParty\spdlog\Include;$(SolutionDir)ThirdParty\GLFW\Include;$(SolutionDir)ThirdParty\Glad\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Binaries\$(ProjectName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Binaries\$(ProjectName)$(Configuration)\Intermediate\</IntDir>
-    <IncludePath>$(SolutionDir)\Engine;$(SolutionDir)ThirdParty\stb\Include;$(SolutionDir)ThirdParty\glm\Include;$(SolutionDir)ThirdParty\ImGui\Include;$(SolutionDir)ThirdParty\spdlog\Include;$(SolutionDir)ThirdParty\GLFW\Include;$(SolutionDir)ThirdParty\Glad\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ThirdParty\freetype\Include;$(SolutionDir)\Engine;$(SolutionDir)ThirdParty\stb\Include;$(SolutionDir)ThirdParty\glm\Include;$(SolutionDir)ThirdParty\ImGui\Include;$(SolutionDir)ThirdParty\spdlog\Include;$(SolutionDir)ThirdParty\GLFW\Include;$(SolutionDir)ThirdParty\Glad\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -144,6 +144,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="imgui.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ImGui\LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

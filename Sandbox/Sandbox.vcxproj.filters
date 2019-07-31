@@ -20,6 +20,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Natvis Include="imgui.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ImGui\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="imgui.ini" />
   </ItemGroup>
 </Project>

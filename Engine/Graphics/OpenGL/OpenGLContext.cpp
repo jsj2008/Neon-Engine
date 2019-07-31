@@ -8,7 +8,7 @@ namespace Neon
 	{
 		OpenGLContext::OpenGLContext(GLFWwindow* window) : m_pWindow(window)
 		{
-			glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+			glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 			if (!window) { Log::Critical("GLFW Window is NULL!"); }
 		}
 
